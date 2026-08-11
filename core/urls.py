@@ -27,6 +27,7 @@ urlpatterns = [
 
     # dashboard
     path('dashboard/pharmacy/', include('apps.pharmacy.urls')),
+    path('dashboard/customer/', include('apps.customer.urls')),
 
     # simplejwt
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
