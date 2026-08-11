@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-r from-blue-100 via-white to-indigo-100 min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-lg bg-white shadow-2xl rounded-2xl p-8">
+
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-blue-700">
+                🏥 Pharmacy Details
+            </h2>
+            <p class="text-gray-500 mt-2">
+                View complete information about the pharmacy
+            </p>
+        </div>
+
+        <div class="space-y-5">
+
+            <div class="flex justify-between border-b pb-3">
+                <span class="font-semibold text-gray-700">Name</span>
+                <span class="text-gray-900">{{ pharmacy.name }}</span>
+            </div>
+
+            <div class="flex justify-between border-b pb-3">
+                <span class="font-semibold text-gray-700">Email</span>
+                <span class="text-gray-900">{{ pharmacy.email }}</span>
+            </div>
+
+            <div class="flex justify-between border-b pb-3">
+                <span class="font-semibold text-gray-700">Phone</span>
+                <span class="text-gray-900">{{ pharmacy.phone }}</span>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex justify-center">
+            <a href="{% url 'pharmacy_list' %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg transition duration-300">
+                ← Back to Pharmacy List
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

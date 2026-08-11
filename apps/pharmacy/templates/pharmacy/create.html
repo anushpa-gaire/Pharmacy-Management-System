@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-2xl bg-white shadow-xl rounded-xl overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-blue-600 text-white px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                💊 Pharmacy Form
+            </h2>
+            <p class="text-blue-100 text-sm mt-1">
+                Fill in the pharmacy information below.
+            </p>
+        </div>
+
+        <!-- Form -->
+        <div class="p-8">
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+
+                <div class="space-y-4">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <a href="{% url 'pharmacy_list' %}"
+                        class="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                        class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition shadow">
+                        Save Pharmacy
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
