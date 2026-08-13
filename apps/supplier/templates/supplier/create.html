@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Supplier</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen py-10 px-4">
+
+    <div class="max-w-2xl mx-auto">
+
+        <!-- Card -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+            <!-- Header -->
+            <div class="bg-blue-600 text-white px-6 py-4">
+                <h3 class="text-2xl font-bold">
+                    Create Supplier
+                </h3>
+            </div>
+
+            <!-- Body -->
+            <div class="p-6">
+
+                <form method="POST" class="space-y-5">
+
+                    {% csrf_token %}
+
+                    <!-- Django Form -->
+                    <div class="space-y-4">
+                        {{ form.as_p }}
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex gap-3 pt-3">
+
+                        <button type="submit" class="bg-green-600 hover:bg-green-700
+                                   text-white font-semibold
+                                   px-5 py-2.5 rounded-lg
+                                   transition duration-200">
+                            Save
+                        </button>
+
+                        <a href="{% url 'supplier_list' %}" class="bg-gray-600 hover:bg-gray-700
+                                   text-white font-semibold
+                                   px-5 py-2.5 rounded-lg
+                                   transition duration-200">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

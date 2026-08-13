@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Supplier</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+
+    <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-lg text-center">
+
+        <!-- Heading -->
+        <h2 class="text-2xl font-bold text-red-600 mb-4">
+            Delete Supplier
+        </h2>
+
+        <!-- Confirmation Message -->
+        <p class="text-gray-600 text-lg mb-6">
+            Are you sure you want to delete
+            <span class="font-bold text-gray-900">
+                {{ object.company_name }}
+            </span>?
+        </p>
+
+        <!-- Delete Form -->
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button type="submit" class="bg-red-600 hover:bg-red-700
+                       text-white font-semibold
+                       px-5 py-2.5 rounded-lg
+                       transition duration-200
+                       mr-2">
+                Yes, Delete
+            </button>
+
+            <!-- Cancel -->
+            <a href="{% url 'supplier_list' %}" class="inline-block bg-gray-600 hover:bg-gray-700
+                       text-white font-semibold
+                       px-5 py-2.5 rounded-lg
+                       transition duration-200">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

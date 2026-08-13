@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Supplier Details</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen py-10 px-4">
+
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+
+        <!-- Heading -->
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">
+            Supplier Details
+        </h2>
+
+        <!-- Company Name -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Company Name
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.company_name }}
+            </div>
+        </div>
+
+        <!-- Contact Person -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Contact Person
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.contact_person }}
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Email
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.email|default:"Not provided" }}
+            </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Phone
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.phone }}
+            </div>
+        </div>
+
+        <!-- Registration Number -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Registration Number
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.registration_number|default:"Not provided" }}
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Address
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.address|default:"Not provided" }}
+            </div>
+        </div>
+
+        <!-- Payment Terms -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Payment Terms
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.payment_terms|default:"Not provided" }}
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Status
+            </div>
+
+            <div class="w-3/5">
+                {% if object.status %}
+                <span class="inline-block bg-green-100 text-green-700
+                                 px-3 py-1 rounded-full text-sm font-semibold">
+                    Active
+                </span>
+                {% else %}
+                <span class="inline-block bg-red-100 text-red-700
+                                 px-3 py-1 rounded-full text-sm font-semibold">
+                    Inactive
+                </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Created At -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Created At
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.created_at }}
+            </div>
+        </div>
+
+        <!-- Updated At -->
+        <div class="flex py-4 border-b border-gray-200">
+            <div class="w-2/5 font-semibold text-gray-600">
+                Updated At
+            </div>
+
+            <div class="w-3/5 text-gray-800">
+                {{ object.updated_at }}
+            </div>
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="flex justify-center gap-3 mt-8">
+
+            <!-- Back -->
+            <a href="{% url 'supplier_list' %}" class="bg-gray-600 hover:bg-gray-700
+                      text-white font-semibold
+                      px-5 py-2.5 rounded-lg
+                      transition duration-200">
+                Back
+            </a>
+
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -28,6 +28,8 @@ urlpatterns = [
     # dashboard
     path('dashboard/pharmacy/', include('apps.pharmacy.urls')),
     path('dashboard/customer/', include('apps.customer.urls')),
+    path('dashboard/supplier/', include('apps.supplier.urls')),
+
 
     # simplejwt
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

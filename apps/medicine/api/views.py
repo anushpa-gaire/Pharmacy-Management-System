@@ -44,3 +44,31 @@ class MedicineView(GenericAPIView):
             })
         else:
             return Response(serialzier.errors, status.HTTP_400_BAD_REQUEST)
+
+class UpdateMedicineView(GenericAPIView):
+    queryset = Medicine
+    serializer_class = MedicineSerializer
+
+    def get(self, request, id):
+        data = get_object_or_404(Medicine, id=id)
+        serializer = self.get_serializer(data)
+        return Response(serializer.data)
+
+    def put(self,request,id):
+        data = get_object_or_404(Medicine, id=id)
+        serialzier = self.get_serializer(data, data=request.data)
+        if serialzier.is_valid():
+            serialzier.save()
+            return Response({
+                "message":"Medicine Update Successfully"
+            })
+        else:
+            return Response(serialzier.errors, status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, request, id):
+        data = get_object_or_404(Medicine, id=id)
+        data.delete()
+        return Response({
+            "message":"Medicine deleted successfully"
+        },status.HTTP_204_NO_CONTENT)
