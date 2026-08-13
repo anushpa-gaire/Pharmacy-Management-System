@@ -2,8 +2,9 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from apps.medicine.api.serializer import MedicineSerializer
-from apps.medicine.models import Medicine
+from apps.medicine.api.serializer import MedicineSerializer,CategorySerializer
+from apps.medicine.models import Medicine,Catgeory
+
 from django.shortcuts import get_object_or_404
 
 
@@ -11,15 +12,14 @@ class MedicineView(GenericAPIView):
     queryset = Medicine
     serializer_class = MedicineSerializer
 
-
     def get(self, request, *args, **kwargs):
         data = Medicine.objects.all()
-        serializer = MedicineSerializer(data, many=True)
+        serializer = self.get_serializer(data, many=True)
         return Response(serializer.data)
 
     def post(self, request):
         data = request.data
-        serializer = MedicineSerializer(data=data)
+        serializer = self.get_serializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response({
@@ -27,7 +27,6 @@ class MedicineView(GenericAPIView):
             })
         else:
             return Response(serializer.errors)
-
 
     def put(self,request, *args, **kwargs):
         id = request.GET.get('id')
@@ -40,10 +39,12 @@ class MedicineView(GenericAPIView):
         if serialzier.is_valid():
             serialzier.save()
             return Response({
-                "message":"Put request trigger"
+                "message":"Medicine Update Successfully"
             })
         else:
             return Response(serialzier.errors, status.HTTP_400_BAD_REQUEST)
+
+
 
 class UpdateMedicineView(GenericAPIView):
     queryset = Medicine

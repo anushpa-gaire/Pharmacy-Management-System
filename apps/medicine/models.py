@@ -1,6 +1,16 @@
 from django.db import models
 
 # Create your models here.
+class Catgeory(models.Model):
+    name = models.CharField(max_length=10, verbose_name="Catgeory Name")
+    is_active = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "catgeory"
 
 class DosageForm(models.TextChoices):
     TABLET = "tablet", "Tablet"
@@ -42,6 +52,7 @@ class Medicine(models.Model):
     generic_name = models.CharField(max_length=100, blank=True)
     brand_name = models.CharField(max_length=100, blank=True)
     medicine_code = models.IntegerField(unique=True)
+    category = models.ForeignKey(Catgeory, on_delete=models.CASCADE, null=True, blank=True)
     dosage_form = models.CharField(max_length=20, choices=DosageForm.choices, default=DosageForm.TABLET)
     strength = models.CharField(max_length=10, help_text="store mg/mcg/IU/mL of medicine")
     barcode = models.PositiveIntegerField(unique=True)

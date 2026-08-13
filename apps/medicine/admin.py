@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Medicine
+from .models import Catgeory, Medicine
 
 
 @admin.register(Medicine)
@@ -71,7 +71,7 @@ class MedicineAdmin(admin.ModelAdmin):
                     "reorder_level",
                     "storage_location",
                     ("manufacture_date", "expiry_date"),
-                    "status",
+                    "status","category"
                 )
             },
         ),
@@ -86,3 +86,6 @@ class MedicineAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+
+admin.site.register(Catgeory)
