@@ -24,6 +24,7 @@ urlpatterns = [
     path('api/medicine/', include('apps.medicine.api.urls')),
     path('api/pharmacy/', include('apps.pharmacy.api.urls')),
     path('api/customer/', include('apps.customer.api.urls')),
+    path('api/purchase/', include('apps.purchase.api.urls')),
 
     # dashboard
     path('dashboard/pharmacy/', include('apps.pharmacy.urls')),
