@@ -4,17 +4,21 @@ from rest_framework.response import Response
 from apps.customer.api.serializer import CustomerSerializer
 from apps.customer.models import Customer
 from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
 
+@extend_schema(tags=['People'])
 class CustomerView(GenericAPIView):
     queryset = Customer
     serializer_class = CustomerSerializer
 
+    @extend_schema(summary="get all customer information", description="get json response of customer serializer")
     def get(self, request, *args, **kwargs):
         data = Customer.objects.all()
         serializer = self.get_serializer(data, many=True)
         return Response(serializer.data)
 
 
+    @extend_schema(deprecated=True)
     def post(self, request):
         data = request.data
         serializer = self.get_serializer(data=data)
@@ -25,7 +29,7 @@ class CustomerView(GenericAPIView):
             })
         else:
             return Response(serializer.errors)
-        
+
 
 class UpdateCustomerView(GenericAPIView):
     queryset = Customer
