@@ -7,8 +7,9 @@ from apps.purchase.api.serializer import (
     PurchaseItemSerializer,
     PurchaseSerializer,
 )
-from apps.purchase.models import Purchase
-
+from apps.purchase.models import Purchase, PurchaseItem
+from rest_framework.decorators import api_view
+from apps.medicine.api.service import create_medicine_batch
 
 class PurchaseView(GenericAPIView):
     queryset = Purchase
@@ -69,3 +70,24 @@ class UpdatePurchaseView(GenericAPIView):
             },
             status=status.HTTP_204_NO_CONTENT
         )
+
+
+@api_view(['GET'])
+def verify_purchase(request, id):
+    purchase = get_object_or_404(Purchase, id=id)
+    if purchase.is_purchase_verified:
+        return Response({
+            "message":"Purchase is already verified, please contact admin"
+        },status.HTTP_400_BAD_REQUEST)
+    else:
+        purchase_item = PurchaseItem.objects.filter(purchase=purchase)
+        for item in purchase_item:
+            create_medicine_batch(
+                medicine=item.medicine,
+                manufacturing_date = item.manufacturing_date,
+                supplier = purchase.supplier
+            )
+
+        return Response({
+            "message":"Proccessing"
+        })

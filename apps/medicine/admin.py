@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Catgeory, Medicine
+from .models import Catgeory, Medicine, MedicineBatch
 
 
 @admin.register(Medicine)
@@ -11,10 +11,7 @@ class MedicineAdmin(admin.ModelAdmin):
         "brand_name",
         "dosage_form",
         "strength",
-        "selling_price",
-        "purchase_price",
         "reorder_level",
-        "expiry_date",
         "status",
     )
 
@@ -22,7 +19,6 @@ class MedicineAdmin(admin.ModelAdmin):
         "status",
         "dosage_form",
         "manufacture_date",
-        "expiry_date",
         "created_at",
     )
 
@@ -55,22 +51,13 @@ class MedicineAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        (
-            "Pricing",
-            {
-                "fields": (
-                    ("purchase_price", "selling_price"),
-                    "tax_rate",
-                )
-            },
-        ),
+
         (
             "Inventory",
             {
                 "fields": (
                     "reorder_level",
                     "storage_location",
-                    ("manufacture_date", "expiry_date"),
                     "status","category"
                 )
             },
@@ -89,3 +76,82 @@ class MedicineAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Catgeory)
+
+
+
+@admin.register(MedicineBatch)
+class MedicineBatchAdmin(admin.ModelAdmin):
+    list_display = (
+        "medicine",
+        "batch_number",
+        "supplier",
+        "quantity",
+        "purchase_price",
+        "selling_price",
+        "manufacturing_date",
+        "expiry_date",
+        "received_date",
+        "status",
+    )
+
+    list_filter = (
+        "status",
+        "supplier",
+        "expiry_date",
+        "received_date",
+    )
+
+    search_fields = (
+        "medicine__name",
+        "batch_number",
+        "supplier__name",
+    )
+
+    list_editable = (
+        "quantity",
+        "selling_price",
+        "status",
+    )
+
+
+    ordering = (
+        "-received_date",
+        "medicine",
+        "batch_number",
+    )
+
+    date_hierarchy = "received_date"
+
+    fieldsets = (
+        (
+            "Medicine & Batch",
+            {
+                "fields": (
+                    "medicine",
+                    "batch_number",
+                    "supplier",
+                )
+            },
+        ),
+        (
+            "Stock & Pricing",
+            {
+                "fields": (
+                    "quantity",
+                    "purchase_price",
+                    "selling_price",
+                    "status",
+                )
+            },
+        ),
+        (
+            "Dates",
+            {
+                "fields": (
+                    "manufacturing_date",
+                    "expiry_date",
+                    "received_date",
+                )
+            },
+        ),
+    )

@@ -1,4 +1,5 @@
 from django.db import models
+# from apps.supplier.models import Supplier
 
 # Create your models here.
 class Catgeory(models.Model):
@@ -56,13 +57,9 @@ class Medicine(models.Model):
     dosage_form = models.CharField(max_length=20, choices=DosageForm.choices, default=DosageForm.TABLET)
     strength = models.CharField(max_length=10, help_text="store mg/mcg/IU/mL of medicine")
     barcode = models.PositiveIntegerField(unique=True)
-    purchase_price = models.DecimalField(max_digits=10, decimal_places=2)
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2)
-    tax_rate = models.DecimalField(max_digits=10, decimal_places=2)
     reorder_level = models.IntegerField(default=10)
     storage_location  = models.CharField(max_length=150, null=True, blank=True)
     manufacture_date = models.DateField()
-    expiry_date = models.DateField()
     status = models.CharField(max_length=15, choices=MedicineStatus.choices, default=MedicineStatus.ACTIVE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -71,6 +68,25 @@ class Medicine(models.Model):
     def __str__(self):
         return self.name
 
-
     class Meta:
         db_table = "medicine"
+
+
+
+class MedicineBatch(models.Model):
+    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    batch_number = models.PositiveIntegerField(auto_created=True)
+    manufacturing_date = models.DateField()
+    expiry_date = models.DateField()
+    quantity = models.PositiveIntegerField(default=0)
+    purchase_price = models.DecimalField(decimal_places=2, max_digits=8)
+    selling_price  = models.DecimalField(decimal_places=2, max_digits=8)
+    supplier = models.ForeignKey('supplier.Supplier', on_delete=models.CASCADE)
+    received_date = models.DateField()
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.medicine.name
+
+    class Meta:
+        db_table = "medicine-batch"

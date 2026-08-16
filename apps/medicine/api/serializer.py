@@ -9,7 +9,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class MedicineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
-        exclude = ['purchase_price']
+        fields = "__all__"
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
