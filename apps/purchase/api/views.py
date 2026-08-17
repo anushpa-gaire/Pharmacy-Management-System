@@ -10,7 +10,7 @@ from apps.purchase.api.serializer import (
 from apps.purchase.models import Purchase, PurchaseItem
 from rest_framework.decorators import api_view
 from apps.medicine.api.service import create_medicine_batch
-
+from datetime import datetime
 class PurchaseView(GenericAPIView):
     queryset = Purchase
     serializer_class = PurchaseSerializer
@@ -72,6 +72,19 @@ class UpdatePurchaseView(GenericAPIView):
         )
 
 
+
+# {
+#     "purchase":"1",
+#     "items":[
+#         {
+#            " purchase item"
+#         },
+#         {
+
+#         }
+#     ]
+# }
+
 @api_view(['GET'])
 def verify_purchase(request, id):
     purchase = get_object_or_404(Purchase, id=id)
@@ -84,10 +97,18 @@ def verify_purchase(request, id):
         for item in purchase_item:
             create_medicine_batch(
                 medicine=item.medicine,
+                batch_number = item.id ,
                 manufacturing_date = item.manufacturing_date,
-                supplier = purchase.supplier
+                quantity = item.quantity,
+                supplier = purchase.supplier,
+                expiry_date = item.expiry_date,
+                purchase_price = item.unit_price,
+                selling_price = (35/100)* float(item.unit_price) + float(item.unit_price),
+                received_date = str(datetime.now().date())
             )
+        purchase.is_purchase_verified = True
+        purchase.save()
 
         return Response({
-            "message":"Proccessing"
+            "message":"Purchase is verified"
         })
