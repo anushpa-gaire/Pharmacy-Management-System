@@ -1,6 +1,6 @@
 from rest_framework.generics import GenericAPIView
 from apps.sales.models import Sales, SalesItem
-from apps.sales.api.seraizlier import SalesSerializer, SalesItemSerializer
+from apps.sales.api.serializer import SalesSerializer, SalesItemSerializer
 from rest_framework.response import Response
 
 class SalesView(GenericAPIView):
