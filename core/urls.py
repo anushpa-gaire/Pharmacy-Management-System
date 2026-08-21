@@ -19,7 +19,6 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/supplier/',include('apps.supplier.api.urls')),
@@ -28,6 +27,8 @@ urlpatterns = [
     path('api/customer/', include('apps.customer.api.urls')),
     path('api/purchase/', include('apps.purchase.api.urls')),
     path('api/inventory/', include('apps.inventory.api.urls')),
+    path('api/sales/', include('apps.sales.api.urls')),
+
 
     # dashboard
     path('dashboard/pharmacy/', include('apps.pharmacy.urls')),
